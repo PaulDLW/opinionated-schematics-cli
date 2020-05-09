@@ -1,4 +1,4 @@
-#!/usr/bin/env nod
+#!/usr/bin/env node
 import * as shelljs from "shelljs";
 
 const ANGULAR_CLI_PACKAGE_NAME = "@angular/cli";
