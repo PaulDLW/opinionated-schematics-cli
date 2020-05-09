@@ -1,24 +1,37 @@
 #!/usr/bin/env node
-import * as shelljs from "shelljs";
+import * as schematicCli from "@angular-devkit/schematics-cli/bin/schematics";
 
-const ANGULAR_CLI_PACKAGE_NAME = "@angular/cli";
-const SCHEMATICS_PACKAGE_NAME = "opinionated-schematics";
+const PACKAGE_NAME = "opinionated-schematics";
 
-function main() {
-  const args = process.argv.slice(2).join(" ");
+async function main() {
+  const args = process.argv.slice(2);
 
-  shelljs.config.silent = true;
-  const globalNpmInstalls = shelljs.exec("npm list -g --depth=0");
-  shelljs.config.silent = false;
+  const argsForNormalising = [`${PACKAGE_NAME}:${args[0]}`, ...args.slice(1)];
 
-  const isInList = globalNpmInstalls.includes(ANGULAR_CLI_PACKAGE_NAME);
+  const normalisedArgs = argsForNormalising.reduce(
+    (args, arg) => [...args, ...normaliseArg(arg)],
+    [] as string[]
+  );
 
-  if (!isInList) {
-    console.log("@angular/cli is not installed, please install it globally");
-    return;
+  console.log("normalisedArgs: ", normalisedArgs);
+
+  await schematicCli.main({ args: normalisedArgs });
+}
+
+function normaliseArg(arg: string) {
+  if (arg.includes("=true")) {
+    const splitArg = arg.split("=") as any;
+    splitArg[1] = true;
+    return splitArg;
+  } else if (arg.includes("=false")) {
+    const splitArg = arg.split("=") as any;
+    splitArg[1] = false;
+    return splitArg;
+  } else {
+    const normArg = arg === "true" ? true : arg === "false" ? false : arg;
+
+    return [normArg] as string[];
   }
-
-  shelljs.exec(`ng g ${SCHEMATICS_PACKAGE_NAME}:${args}`);
 }
 
 main();
