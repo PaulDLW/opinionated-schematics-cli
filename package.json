@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc --project tsconfig.json"
+    "build": "tsc --project tsconfig.json",
+    "schematics": "schematics"
   },
   "release": {
     "plugins": [
@@ -42,9 +43,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/shelljs": "^0.8.7",
-    "opinionated-schematics": "^1.1.2",
-    "shelljs": "^0.8.4"
+    "@angular-devkit/schematics-cli": "^0.901.5",
+    "opinionated-schematics": "^1.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
