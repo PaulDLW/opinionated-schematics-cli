@@ -13,8 +13,6 @@ async function main() {
     [] as string[]
   );
 
-  console.log("normalisedArgs: ", normalisedArgs);
-
   await schematicCli.main({ args: normalisedArgs });
 }
 
