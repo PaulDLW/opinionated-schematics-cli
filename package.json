@@ -11,6 +11,7 @@
     "os": "./dist/main.js"
   },
   "scripts": {
+    "lint": "tslint --project .",
     "test": "jest",
     "build": "tsc --project tsconfig.json",
     "schematics": "schematics"
@@ -37,7 +38,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "git-branch-is -r \"^((?!master).)*$\""
+      "pre-commit": "git-branch-is -r \"^((?!master).)*$\" && npm run lint"
     }
   },
   "author": "",
@@ -58,7 +59,8 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "semantic-release": "^17.0.7",
-    "ts-jest": "^25.5.0",
-    "typescript": "^3.8.3"
+    "ts-jest": "^26.0.0",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.3"
   }
 }
