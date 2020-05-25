@@ -4,10 +4,10 @@ This is essentially a proxy for 'ng g' but using the opinionated-schematics coll
 
 This has a niche use where you want to use the schematics, but you are not allowed to leave a footprint of having opinionated-schematics saved as a dev-dependancy in your package.json
 
-##Installation
+## Installation
 You should install this package globally.
 
-npm install -g opinionated-schematics-cli
+```npm install -g opinionated-schematics-cli```
 
 ## Usage
 
